@@ -4,11 +4,13 @@ import datetime
 import json
 import sys
 
+import isoweek
+
 from framework.trend_detection import TrendDetection
 
 
-class TrendDetectionNaive(TrendDetection):
-    """ Trend detection component that returns all detected concepts as daily trends regardless of frequency """
+class WeeklyTrendDetection(TrendDetection):
+    """ Trend detection component that returns all detected concepts as weekly trends regardless of frequency """
 
     def run(self):
 
@@ -33,7 +35,8 @@ class TrendDetectionNaive(TrendDetection):
                 trendsout[concept] = []
 
             for date, count in datecounts.iteritems():
-                unixtime = calendar.timegm(date.timetuple())
+                week = isoweek.Week(date.year, date.isocalendar()[1]).monday()
+                unixtime = calendar.timegm(week.timetuple())
                 trendsout[concept].append({"start": unixtime, "end": unixtime, "strength": count})
 
         json.dump(trendsout, codecs.open(self.outfn, "w", encoding="utf-8"))
@@ -43,5 +46,5 @@ if __name__ == "__main__":
         print >> sys.stderr, "usage: <document metadata file> <ConceptPairs file> <output file>"
         sys.exit(1)
 
-    td = TrendDetectionNaive(docMeta=sys.argv[1], conceptPairs=sys.argv[2], outfn=sys.argv[3])
+    td = WeeklyTrendDetection(docMeta=sys.argv[1], conceptPairs=sys.argv[2], outfn=sys.argv[3])
     td.run()

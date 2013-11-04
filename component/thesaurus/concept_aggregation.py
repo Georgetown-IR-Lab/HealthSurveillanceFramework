@@ -5,8 +5,8 @@ import sys
 from framework.concept_aggregation import ConceptAggregation
 
 
-class ConceptAggregationNaive(ConceptAggregation):
-    """ Concept aggregation component that maps each concept to the first thesaurus entry containing the concept """
+class ThesaurusConceptAggregation(ConceptAggregation):
+    """ Concept aggregation component that maps each concept to the thesaurus entries containing the concept """
 
     def run(self):
         aggConceptPairs = {}
@@ -15,8 +15,9 @@ class ConceptAggregationNaive(ConceptAggregation):
             if concept in self.revthesaurus:
                 aggConceptPairs.setdefault(self.revthesaurus[concept], set()).update(docids)
             else:
-                for subconcept in [x for x in concept.split(" ") if x in self.revthesaurus]:
-                    aggConceptPairs.setdefault(self.revthesaurus[subconcept], set()).update(docids)
+                for subconcepts in [x for x in concept.split(" ") if x in self.revthesaurus]:
+                    for subconcept in subconcepts:
+                        aggConceptPairs.setdefault(self.revthesaurus[subconcept], set()).update(docids)
 
         json.dump({k: list(v) for k, v in aggConceptPairs.iteritems()}, codecs.open(self.outfn, "w", encoding="utf-8"))
 
@@ -26,14 +27,13 @@ class ConceptAggregationNaive(ConceptAggregation):
         self.revthesaurus = {}
         for entryid, concepts in self.thesaurus.iteritems():
             for concept in concepts:
-                if concept not in self.revthesaurus:
-                    self.revthesaurus[concept] = entryid
+                self.revthesaurus.setdefault(concept, set()).add(entryid)
 
 if __name__ == "__main__":
     if len(sys.argv) != 4:
         print >> sys.stderr, "usage: <ConceptPairs file> <thesaurus file> <output file>"
         sys.exit(1)
 
-    ca = ConceptAggregationNaive(conceptPairs=sys.argv[1], outfn=sys.argv[3])
+    ca = ThesaurusConceptAggregation(conceptPairs=sys.argv[1], outfn=sys.argv[3])
     ca.load_thesaurus(sys.argv[2])
     ca.run()
