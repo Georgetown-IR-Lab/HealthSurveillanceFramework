@@ -14,16 +14,17 @@ class TrendDetectionNaive(TrendDetection):
 
         # map concept -> (date -> count)
         trends = {}
-        for docid, concept in self.conceptPairs:
-            date = datetime.datetime.fromtimestamp(self.docMeta[docid]['created_at']).date()
-
+        for concept, docids in self.conceptPairs.iteritems():
             if concept not in trends:
                 trends[concept] = {}
 
-            if date not in trends[concept]:
-                trends[concept][date] = 1
-            else:
-                trends[concept][date] += 1
+            for docid in docids:
+                date = datetime.datetime.fromtimestamp(self.docMeta[docid]['created_at']).date()
+
+                if date not in trends[concept]:
+                    trends[concept][date] = 1
+                else:
+                    trends[concept][date] += 1
 
         # output trends
         trendsout = {}
