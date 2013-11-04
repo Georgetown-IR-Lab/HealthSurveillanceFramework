@@ -42,7 +42,7 @@ Example: *data/example/docfiles.json*
 
 ## Documents <a name="document"></a>
     { "document_id_1": <document 1's text>, "document_id_2": <document 2's text>, ... }
-Document text is a space-separated string of tokenized text (e.g., "I have the flu)
+Document text is a space-separated string of tokenized text (e.g., "I have the flu")
 
 Example: *data/example/docs.json*
 
