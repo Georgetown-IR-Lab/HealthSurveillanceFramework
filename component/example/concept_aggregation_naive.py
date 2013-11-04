@@ -9,11 +9,11 @@ class ConceptAggregationNaive(ConceptAggregation):
     """ Concept aggregation component that maps each concept to the first thesaurus entry containing the concept """
 
     def run(self):
-        aggConceptPairs = []
+        aggConceptPairs = {}
 
-        for docid, concept in self.conceptPairs:
+        for concept, docids in self.conceptPairs.iteritems():
             if concept in self.revthesaurus:
-                aggConceptPairs.append((docid, self.revthesaurus[concept]))
+                    aggConceptPairs[self.revthesaurus[concept]] = list(docids)
 
         json.dump(aggConceptPairs, codecs.open(self.outfn, "w", encoding="utf-8"))
 

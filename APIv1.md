@@ -64,8 +64,10 @@ To use a dictionary as input rather than a thesaurus, simply assign only one phr
 Example: *data/example/thesaurus.json*
 
 ## ConceptPairs
-    [ ["concept_id_X", "document_id_123"], ["concept_id_X", "document_id_124"], ... ]
-Each inner array is a concept id, document id pair.
+    { "concept_id_X": ["document_id_123", "document_id_128", ...],
+      "concept_id_Y": ...
+    }
+Each concept id is mapped to a list of documents it occurs in.
 
 ## TrendTimes
     { "concept_id_X": [ { "start": <date>, "end": <date>, "strength": <strength> },

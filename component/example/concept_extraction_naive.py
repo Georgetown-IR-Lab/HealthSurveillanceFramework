@@ -9,13 +9,17 @@ class ConceptExtractionNaive(ConceptExtraction):
     """ Concept extraction component that returns every term as a concept """
 
     def run(self):
-        conceptPairs = []
+        conceptPairs = {}
 
         # treat every term as a concept
         for docid, txt in self.stream_docs():
             for term in set(txt.split(" ")):
-                conceptPairs.append((docid, term))
+                if term not in conceptPairs:
+                    conceptPairs[term] = set()
 
+                conceptPairs[term].add(docid)
+
+        conceptPairs = dict([(k, list(v)) for k, v in conceptPairs.iteritems()])
         json.dump(conceptPairs, codecs.open(self.outfn, "w", encoding="utf-8"))
 
 if __name__ == "__main__":
