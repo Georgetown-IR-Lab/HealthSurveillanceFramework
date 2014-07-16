@@ -8,7 +8,9 @@ from framework.concept_aggregation import ConceptAggregation
 
 
 class ConceptAggregationWiki(ConceptAggregation):
-    """ Concept aggregation component based on the ASONAM paper [1] in README.md """
+    """ Concept aggregation component based on
+        J. Parker, Y. Wei, A. Yates, N. Goharian, O. Frieder, "A Framework for Detecting Public Health Trends with Twitter",
+        The 2013 IEEE/ACM International Conference on Advances in Social Network Analysis and Mining, August 2013. """
 
     def run(self):
         aggConceptPairs = {}

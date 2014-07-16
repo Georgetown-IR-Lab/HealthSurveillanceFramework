@@ -3,7 +3,3 @@ This repository contains the reference implementation of our framework for publi
 
 
 Additional documentation is available on [Read the Docs](http://healthsurveillanceframework.readthedocs.org/en/latest/) or in the *docs* directory.
-
-
-# References
-1. J. Parker, Y. Wei, A. Yates, N. Goharian, O. Frieder, "A Framework for Detecting Public Health Trends with Twitter", *The 2013 IEEE/ACM International Conference on Advances in Social Network Analysis and Mining*, August 2013.
