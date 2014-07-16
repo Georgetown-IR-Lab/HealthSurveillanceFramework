@@ -1,2 +1,4 @@
 *.py[oc]
-java/classes
+java/classes/
+tmp/
+docs/_build/
