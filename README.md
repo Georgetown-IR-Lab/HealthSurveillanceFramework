@@ -1,20 +1,8 @@
 # HealthSurveillanceFramework
-This repository contains the reference implementation of our framework for public health surveillance. The framework's architecture is illustrated in architecture.pdf. The API is documented in *APIv1.md*.
+This repository contains the reference implementation of our framework for public health surveillance, including Python abstract classes, example components conforming to the API, implemenations of components, and Java classes for reading and writing the API’s file formats. We will continue to release additional code with new publications.
 
-# Code
-The repository's primary purpose is to illustrate the framework's architecture and API. We are in the process of releasing the code described in [1] that conforms to *HealthSurveillanceFramework*'s API. We will continue to release additional code with new publications.
 
-This repository contains Python abstract classes and example components conforming to the API, and Java classes for reading and writing the API's file formats.
-
-## Python
-* *framework*: contains Python abstract classes for implementing the framework's API
-* *component/example*: contains simple examples of each component
-
-## Java
-* *java/src/healthSurveillanceFramework/fileFormats*: classes for handling input/output files
-
-## Example Data
-* *data/example*: contains synthetic data for use with the component examples
+Additional documentation is available on [Read the Docs](http://healthsurveillanceframework.readthedocs.org/en/latest/) or in the *docs* directory.
 
 
 # References
