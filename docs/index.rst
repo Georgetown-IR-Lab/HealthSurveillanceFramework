@@ -8,8 +8,6 @@ We will continue to release additional code with new publications.
 
 .. _repository: https://github.com/Georgetown-IR-Lab/HealthSurveillanceFramework
 
-Contents:
-
 .. toctree::
    :maxdepth: 3
 
