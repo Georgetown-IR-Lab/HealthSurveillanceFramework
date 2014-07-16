@@ -16,11 +16,3 @@ Contents:
    code_overview
    framework_api
    example_commands
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
-
