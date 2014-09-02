@@ -80,7 +80,7 @@ class ConceptExtractionSliding(ConceptExtraction):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 3:
+    if len(sys.argv) != 4:
         print >> sys.stderr, "usage: <docfiles file> <thesaurus file> <output file>"
         sys.exit(1)
 
