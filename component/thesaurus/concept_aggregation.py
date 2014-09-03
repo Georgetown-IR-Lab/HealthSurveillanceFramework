@@ -13,11 +13,12 @@ class ThesaurusConceptAggregation(ConceptAggregation):
 
         for concept, docids in self.conceptPairs.iteritems():
             if concept in self.revthesaurus:
-                aggConceptPairs.setdefault(self.revthesaurus[concept], set()).update(docids)
+                agg_concepts = self.revthesaurus[concept]
             else:
-                for subconcepts in [x for x in concept.split(" ") if x in self.revthesaurus]:
-                    for subconcept in subconcepts:
-                        aggConceptPairs.setdefault(self.revthesaurus[subconcept], set()).update(docids)
+                agg_concepts = set(subconcept for x in concept.split(" ") for subconcept in x if x in self.revthesaurus)
+
+            for agg_concept in agg_concepts:
+                aggConceptPairs.setdefault(agg_concept, set()).update(docids)
 
         json.dump({k: list(v) for k, v in aggConceptPairs.iteritems()}, codecs.open(self.outfn, "w", encoding="utf-8"))
 

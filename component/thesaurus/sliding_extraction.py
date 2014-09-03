@@ -13,8 +13,7 @@ class ConceptExtractionSliding(ConceptExtraction):
 
         for docid, txt in self.stream_docs():
             for thesaurus_term in self._window_find(txt, winsize=5):
-                concept = self.revthesaurus[thesaurus_term]
-                conceptPairs.setdefault(concept, set()).add(docid)
+                conceptPairs.setdefault(thesaurus_term, set()).add(docid)
 
         conceptPairs = dict([(k.replace("_", " "), list(v)) for k, v in conceptPairs.iteritems()])
         json.dump(conceptPairs, codecs.open(self.outfn, "w", encoding="utf-8"))
